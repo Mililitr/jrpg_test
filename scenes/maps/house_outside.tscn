@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://d31ofg264eng6"]
+
+[ext_resource type="Texture2D" uid="uid://bcwsfb6cf2ea8" path="res://materials/house.png" id="1_m5ngi"]
+[ext_resource type="Script" path="res://scenes/maps/house_outside.gd" id="1_yxv1n"]
+[ext_resource type="Script" path="res://scenes/objects/door_area.gd" id="3_1yvoj"]
+[ext_resource type="Texture2D" uid="uid://b2v65oeu2j2bk" path="res://materials/house_open.png" id="3_5gpq1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m2a8m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m5ngi")
+}],
+"loop": true,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5gpq1")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igq6v"]
+size = Vector2(64, 20)
+
+[node name="house_outside" type="StaticBody2D"]
+collision_mask = 2
+script = ExtResource("1_yxv1n")
+
+[node name="c" type="CollisionPolygon2D" parent="."]
+y_sort_enabled = true
+polygon = PackedVector2Array(120, -56, 120, 120, -120, 120, -120, -56)
+
+[node name="anime_sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(15, 15)
+sprite_frames = SubResource("SpriteFrames_m2a8m")
+animation = &"close"
+
+[node name="door_area" type="Area2D" parent="."]
+position = Vector2(0, 128)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_1yvoj")
+
+[node name="c" type="CollisionShape2D" parent="door_area"]
+shape = SubResource("RectangleShape2D_igq6v")

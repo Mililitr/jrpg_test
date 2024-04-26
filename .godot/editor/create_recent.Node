@@ -1,0 +1,14 @@
+CollisionShape2D
+Sprite2D
+Node2D
+AnimatedSprite2D
+CollisionPolygon2D
+StaticBody2D
+Panel
+PanelContainer
+MarginContainer
+Label
+ColorRect
+CanvasLayer
+Control
+Node

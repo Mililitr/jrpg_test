@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvqfjbqyirmim"]
+
+[ext_resource type="PackedScene" uid="uid://bxu1f5isubat4" path="res://scenes/objects/items/tree.tscn" id="1_f0mk6"]
+[ext_resource type="PackedScene" uid="uid://b3v2aq04mn2e8" path="res://scenes/objects/items/orange.tscn" id="3_h8dol"]
+[ext_resource type="PackedScene" uid="uid://bj7cbim3hr5d1" path="res://scenes/objects/items/chile.tscn" id="4_nu315"]
+[ext_resource type="PackedScene" uid="uid://c6axkkal01fb2" path="res://scenes/objects/items/olive.tscn" id="4_slsko"]
+[ext_resource type="PackedScene" uid="uid://bxe0yroccrj6b" path="res://scenes/objects/items/potion.tscn" id="5_pwx32"]
+
+[node name="interior" type="Node2D"]
+
+[node name="tree" parent="." instance=ExtResource("1_f0mk6")]
+position = Vector2(-576, 0)
+
+[node name="tree2" parent="." instance=ExtResource("1_f0mk6")]
+position = Vector2(576, 0)
+
+[node name="orange" parent="." instance=ExtResource("3_h8dol")]
+position = Vector2(-256, -256)
+
+[node name="chile" parent="." instance=ExtResource("4_nu315")]
+position = Vector2(0, -256)
+
+[node name="olive" parent="." instance=ExtResource("4_slsko")]
+position = Vector2(256, -256)
+
+[node name="potion" parent="." instance=ExtResource("5_pwx32")]
+position = Vector2(0, -320)

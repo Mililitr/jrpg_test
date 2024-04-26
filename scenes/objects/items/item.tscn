@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctd4kx23ykvnx"]
+
+[ext_resource type="Script" path="res://scenes/objects/items/item.gd" id="1_iuv27"]
+[ext_resource type="Script" path="res://scenes/objects/items/item_area.gd" id="2_2bdul"]
+
+[node name="item" type="Node2D"]
+script = ExtResource("1_iuv27")
+
+[node name="item_area" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_2bdul")
+
+[connection signal="interact_signal" from="item_area" to="." method="_on_interact_area_interact_signal"]

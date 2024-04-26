@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxu1f5isubat4"]
+
+[ext_resource type="PackedScene" uid="uid://ctd4kx23ykvnx" path="res://scenes/objects/items/item.tscn" id="1_bahdc"]
+[ext_resource type="Script" path="res://scenes/objects/items/tree.gd" id="2_mciid"]
+[ext_resource type="Texture2D" uid="uid://b14biq2yhv5i4" path="res://materials/tree.png" id="3_3k72j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7vrq"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbnbj"]
+size = Vector2(16, 16)
+
+[node name="tree" instance=ExtResource("1_bahdc")]
+script = ExtResource("2_mciid")
+
+[node name="c" type="CollisionShape2D" parent="item_area" index="0"]
+shape = SubResource("RectangleShape2D_o7vrq")
+
+[node name="sprite" type="Sprite2D" parent="." index="1"]
+position = Vector2(0, -80)
+scale = Vector2(10, 10)
+texture = ExtResource("3_3k72j")
+
+[node name="static" type="StaticBody2D" parent="." index="2"]
+collision_mask = 0
+
+[node name="c" type="CollisionShape2D" parent="static" index="0"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_xbnbj")

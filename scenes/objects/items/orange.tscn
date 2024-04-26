@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3v2aq04mn2e8"]
+
+[ext_resource type="PackedScene" uid="uid://ctd4kx23ykvnx" path="res://scenes/objects/items/item.tscn" id="1_3ksqr"]
+[ext_resource type="Script" path="res://scenes/objects/items/orange.gd" id="2_srh1a"]
+[ext_resource type="Texture2D" uid="uid://cyi0xxloju1gg" path="res://materials/orange.png" id="3_vk31n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ixq4"]
+size = Vector2(32, 32)
+
+[node name="orange" instance=ExtResource("1_3ksqr")]
+script = ExtResource("2_srh1a")
+
+[node name="c" type="CollisionShape2D" parent="item_area" index="0"]
+shape = SubResource("RectangleShape2D_3ixq4")
+
+[node name="sprite" type="Sprite2D" parent="." index="1"]
+scale = Vector2(5, 5)
+texture = ExtResource("3_vk31n")

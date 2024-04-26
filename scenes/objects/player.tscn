@@ -1,0 +1,160 @@
+[gd_scene load_steps=11 format=3 uid="uid://cf2mojvlq7tju"]
+
+[ext_resource type="Script" path="res://scenes/objects/player.gd" id="1_en87w"]
+[ext_resource type="Texture2D" uid="uid://dc668r7u5vock" path="res://materials/player/player.png" id="2_sxytv"]
+[ext_resource type="PackedScene" uid="uid://vebw6i8smxhp" path="res://scenes/objects/camera.tscn" id="3_k6vjr"]
+[ext_resource type="Texture2D" uid="uid://v1u1ymgye7g4" path="res://materials/player/player_left.png" id="3_ygbaj"]
+[ext_resource type="Texture2D" uid="uid://dnyh25p36g4r" path="res://materials/player/player_right.png" id="4_4o5d3"]
+[ext_resource type="Texture2D" uid="uid://cry1nj7xw6xbh" path="res://materials/player/player_up.png" id="5_7edr6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsfb"]
+radius = 16.0
+height = 32.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jgoon"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sxytv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ygbaj")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4o5d3")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_7edr6")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdk40"]
+radius = 32.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yx4lr"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 0.862745)
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(0, -24)
+collision_layer = 2
+script = ExtResource("1_en87w")
+
+[node name="c" type="CollisionShape2D" parent="."]
+position = Vector2(0, 24)
+shape = SubResource("CapsuleShape2D_ghsfb")
+
+[node name="anime_sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_jgoon")
+animation = &"idle"
+
+[node name="interact_area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="c" type="CollisionShape2D" parent="interact_area"]
+position = Vector2(0, 24)
+shape = SubResource("CircleShape2D_jdk40")
+
+[node name="camera" parent="." instance=ExtResource("3_k6vjr")]
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+[node name="info" type="Panel" parent="hud"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 80.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yx4lr")
+
+[node name="control" type="Label" parent="hud/info"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 49.0
+grow_horizontal = 0
+text = "Move: WASD
+Interact: E"
+
+[node name="stats" type="Panel" parent="hud"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yx4lr")
+
+[node name="hp" type="Label" parent="hud/stats"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 67.0
+offset_bottom = 23.0
+text = "HP 0/0"
+
+[node name="keys" type="Label" parent="hud/stats"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 70.0
+offset_bottom = 39.0
+text = "Keys: 0"
+
+[node name="message" type="Panel" parent="hud"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -342.0
+offset_top = -40.0
+offset_right = 343.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yx4lr")
+
+[node name="label" type="Label" parent="hud/message"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "message"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[connection signal="area_entered" from="interact_area" to="." method="_on_interact_area_area_entered"]
+[connection signal="area_exited" from="interact_area" to="." method="_on_interact_area_area_exited"]
